@@ -68,7 +68,7 @@ var Body = React.createClass({
           <div id="nav-btn">
             <i className="fa fa-bars fa-2x" ref="navBtn" />
           </div> : null
-          }
+          } 
         {state.app.signedIn ?
           <div className="user-id">
             <span>User: {state.app.userId}
@@ -88,7 +88,7 @@ var Body = React.createClass({
         <div id="main">
           <div id="game-header">
             <div className="title">
-              <h1>Battleships</h1>
+              <h1>moriarty</h1>
             </div>
             <div className="logo">
               <img className="logo" src="/images/Battleship.png" />
@@ -126,8 +126,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
   Actions.init.showSignIn();
 });
-
-
-
-
-

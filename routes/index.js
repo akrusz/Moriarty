@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', {title: 'Battleships - online game'});
+  res.render('index', {title: 'Moriarty game'});
 });
 
 module.exports = router;

@@ -16,7 +16,7 @@ var GameUser = function (userId) {
   };
 }
 
-var BattleshipsGame = function (emitter, userAId, userBId) {
+var moriartyGame = function (emitter, userAId, userBId) {
 
   if (!userAId || !userBId) {
     throw new Error("One of user IDs is missing");
@@ -230,5 +230,5 @@ var BattleshipsGame = function (emitter, userAId, userBId) {
   }
 };
 
-module.exports = BattleshipsGame;
+module.exports = moriartyGame;
 

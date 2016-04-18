@@ -1,4 +1,4 @@
-var BattleshipsGame = require('../../game/battleships/game')
+var moriartyGame = require('../../game/moriarty/game')
   , EventEmitter = require('events').EventEmitter
   , gameEvents = require('../../game/gameEvents');
 
@@ -7,7 +7,7 @@ var game, emitter = new EventEmitter();
 describe('Battleship game', function () {
 
   beforeEach(function () {
-    game = new BattleshipsGame(emitter, 'player1', 'player2');
+    game = new moriartyGame(emitter, 'player1', 'player2');
   });
 
   it('doesn\'t allow to shoot if ships are not positioned', function(done) {

@@ -11,7 +11,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var LobbyService = require('./game/LobbyService');
-var Game = require('./game/battleships/Service');
+var Game = require('./game/moriarty/Service');
 
 var lobby = new LobbyService(io, Game);
 lobby.start();

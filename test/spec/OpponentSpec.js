@@ -1,4 +1,4 @@
-var opponent = new (require('../../game/battleships/Opponent'))();
+var opponent = new (require('../../game/moriarty/Opponent'))();
 var _ = require('lodash');
 
 describe('BoardUtils', function () {
