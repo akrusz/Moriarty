@@ -4,7 +4,15 @@ var React = require('react')
 
 var SignInView = React.createClass({
 
-  signIn(e) {
+  createGame(e) {
+    e.preventDefault();
+    var userName = this.refs.userName.getDOMNode().value;
+    if (userName) {
+      Actions.init.signIn(userName);
+    }
+  },
+
+  joinGame(e) {
     e.preventDefault();
     var userName = this.refs.userName.getDOMNode().value;
     if (userName) {
@@ -15,13 +23,14 @@ var SignInView = React.createClass({
   render() {
     return (
       <div className="sign-in">
-        <form onSubmit={this.signIn}>
+        <form>
           <div>
             <label className="sr-only" htmlFor="user-name">User name</label>
-            <input type='text' name='user-name' ref='userName' placeholder='User name hui' autoFocus='autofocus' />
+            <input type='text' name='user-name' ref='userName' placeholder='User name' autoFocus='autofocus' />
           </div>
           <div>
-            <button type='submit' className="btn btn-primary">Join HUI!</button>
+            <button onClick={this.joinGame} className="btn btn-primary">Join Game</button>
+            <button onClick={this.createGame} className="btn btn-primary">Create Game</button>
           </div>
         </form>
       </div>);
