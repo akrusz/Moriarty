@@ -14,7 +14,6 @@ var GamePhaseStore = Reflux.createStore({
     this.listenTo(Actions.init.showSignIn, this.initSignIn);
     this.listenTo(Actions.init.signIn, this.initStoresOnSignIn);
     this.listenTo(Actions.init.signIn, this.enterLobby);
-    this.listenTo(Actions.init.playSingle, this.playSingle);
     this.listenTo(Actions.game.shoot, this.takeShot);
     this.listenTo(Actions.game.quit, this.quitGame);
     this.listenTo(Actions.init.signOut, this.signOut);
@@ -96,10 +95,6 @@ var GamePhaseStore = Reflux.createStore({
   initStoresOnSignIn() {
     require('./LobbyStore');
     require('./ConfigStore');
-  },
-
-  playSingle() {
-    socket.emit(gameEvents.client.playSingle);
   },
 
   quitGame() {

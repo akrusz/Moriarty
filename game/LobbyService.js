@@ -78,10 +78,6 @@ module.exports = function (io, gameService) {
         this.onInvitationResponse(socket, response);
       }.bind(this));
 
-      socket.on(gameEvents.client.playSingle, function () {
-        this.onPlaySingle(socket);
-      }.bind(this));
-
       socket.on(gameEvents.client.quitGame, function () {
         this.onQuit(socket);
       }.bind(this));
@@ -120,17 +116,6 @@ module.exports = function (io, gameService) {
         emitter.on(gameEvents.server.gameOver, this.onGameOver);
       }.bind(this), 1000);
     }
-  };
-
-  this.onPlaySingle = function (socket) {
-    _leaveLobby(socket, true);
-
-    io.to('lobby').emit(gameEvents.server.lobbyUpdate, _lobby.getLobbyState());
-    setTimeout(function () {
-      var emitter = new EventEmitter();
-      _startGame(gameService).with(emitter, [socket]);
-      emitter.on(gameEvents.server.gameOver, this.onGameOver);
-    }.bind(this), 1000);
   };
 
   this.onQuit = function (socket) {

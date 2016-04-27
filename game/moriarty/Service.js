@@ -13,8 +13,6 @@ function moriartyService(emitter, sockets) {
     throw new Error('At least one socket must join the game!');
   }
 
-  var singleMode = (sockets.length == 1);
-
   var clientEvents = [
     gameEvents.client.placeShips,
     gameEvents.client.shoot
@@ -34,16 +32,7 @@ function moriartyService(emitter, sockets) {
     });
   });
 
-  var game;
-  if(singleMode) {
-    var opponentName = 'Computer';
-    var opponent = new (require('../../game/moriarty/Opponent'))();
-    opponent.bindEvents(opponentName, emitter);
-    game = new Game(emitter, sockets[0].username, opponentName);
-  }
-  else {
-    game = new Game(emitter, sockets[0].username, sockets[1].username);
-  }
+  var game = new Game(emitter, sockets[0].username, sockets[1].username);
 
   this.start = function () {
     game.start();

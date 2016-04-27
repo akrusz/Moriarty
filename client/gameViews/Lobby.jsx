@@ -34,10 +34,6 @@ var Lobby = React.createClass({
     }
   },
 
-  onSinglePlay() {
-    Actions.init.playSingle(this.state.userId);
-  },
-
   render() {
     var {state} = this, items = [];
     state.users.forEach((user) => {
@@ -53,12 +49,6 @@ var Lobby = React.createClass({
             <p>Invite other users or accept an invitation to start playing!</p>
           </div>
 
-          <div className="single-player">You can also play in
-            <button className="btn btn-primary" onClick={this.onSinglePlay}>
-              Single Player Mode
-            </button>
-          </div>
-
           <div className="content">
             <div className="header">Signed-in users:</div>
             <div className="user-list">
@@ -72,11 +62,6 @@ var Lobby = React.createClass({
         <div className="no-user">
           <p>There are currently no other users in the lobby.</p>
           <p>Please wait or invite a friend!</p>
-          <div className="single-player">You can also play in
-            <button className="btn btn-primary" onClick={this.onSinglePlay}>
-            Single Player Mode
-          </button>
-          </div>
         </div>
         }
       </div>
