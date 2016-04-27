@@ -3,29 +3,29 @@
 @import "bootstrap-import";
 @import "font-awesome.css";
 @import "toast.min.css";
-@import url(http://fonts.googleapis.com/css?family=Raleway:200,400,700,800);
+@import url(http://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin,latin-ext);
 
 @font-face {
-  font-family: army-rust;
+  font-family: alegreya_sansbold;
   src: url("../fonts/army-rust.eot"),
   url('../fonts/army-rust.ttf');
 }
 
 @height-footer: 40px;
 @height-header: 42px;
-@bg-hf: #333;
+@bg-hf: #D86F23;
 
 @color-gameboard: #20B2AA;
 @color-alt: firebrick;
-@color-sidenav-hover: #F08080;
+@color-sidenav-hover: #804000;
 
-@bg: #ffd200;
+@bg: rgb(248, 231, 188);
 @bg-menu: #6B3B3B;
 @input-bg: @bg;
 
 @btn-primary-color: #fff;
 @btn-primary-bg: firebrick;
-@btn-primary-border: darken(@btn-primary-bg, 5%);
+/*@btn-primary-border: darken(@btn-primary-bg, 5%);*/
 
 @fill-ship: #B0C4DE;
 @fill-ship-hit: red;
@@ -57,7 +57,7 @@ html, body {
     }
 
     background-color: whitesmoke;
-    border: solid 1px #888;
+    border: solid 1px whitesmoke;
     color: #333;
     padding: 0 8px 0 8px;
   }
@@ -161,7 +161,7 @@ html, body {
 }
 
 .tool-font {
-  font-family: "Raleway", Arial, sans-serif;
+  font-family: 'Josefin Slab', Arial, sans-serif;
   letter-spacing: initial;
 
   @media (max-width: @screen-xs-max) {
@@ -196,7 +196,7 @@ html, body {
     .tool-font();
 
     span {
-      color: lightgray;
+      color: #fff;
       font-weight: 500;
     }
 
@@ -237,6 +237,7 @@ html, body {
       display: inline-block;
       float: right;
       text-align: right;
+
 
       @media (max-width: @screen-xs-max) {
         width: 83%;
@@ -397,15 +398,15 @@ html, body {
           width: 100%;
           margin: 0;
           color: @color-alt;
-          font-family: army-rust;
+          font-family: 'Josefin Sans';
         }
 
         @media (max-aspect-ratio: 8/5) {
           width: 60%;
           h1 {
-            letter-spacing: 0.6vw;
-            font-size: 10vw;
-            line-height: 11vw;
+            letter-spacing: 0vw;
+            font-size: 16vw;
+            line-height: 25vw;
           }
         }
         @media (min-aspect-ratio: 8/5) {
@@ -442,11 +443,12 @@ html, body {
       }
 
       input {
-        font-family: "Raleway", Arial, sans-serif;
+        font-family: 'Josefin Sans';
       }
 
       button.btn {
         line-height: 1;
+        font-family: 'Josefin Sans';
       }
 
       @media (min-width: @screen-sm-min) {
@@ -464,7 +466,7 @@ html, body {
     }
 
     #game {
-      font: 24px army-rust, "Lucida Grande", Helvetica, Arial, sans-serif;
+      font: 24px army-rust, 'Josefin Sans', Helvetica, Arial, sans-serif;
 
       .lobby {
         @bg-lobby: #debdbd;
@@ -775,9 +777,9 @@ html, body {
           width: 100%;
           font-size: 7vw;
           font-weight: 700;
-          font-family: "Raleway", Arial, sans-serif;
+          font-family: 'Josefin Sans', Arial, sans-serif;
           @btn-primary-bg: gray;
-          @btn-primary-border: darken(gray, 5%);
+          /*@btn-primary-border: darken(gray, 5%);*/
         }
       }
 

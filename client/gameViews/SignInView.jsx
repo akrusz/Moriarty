@@ -26,7 +26,7 @@ var SignInView = React.createClass({
         <form>
           <div>
             <label className="sr-only" htmlFor="user-name">User name</label>
-            <input type='text' name='user-name' ref='userName' placeholder='User name' autoFocus='autofocus' />
+            <input type='text' name='user-name' ref='userName' placeholder='User Name' autoFocus='autofocus' />
           </div>
           <div>
             <button onClick={this.joinGame} className="btn btn-primary display-block enter-buttom">Join</button>
