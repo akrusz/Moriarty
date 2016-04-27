@@ -68,7 +68,7 @@ var Body = React.createClass({
           <div id="nav-btn">
             <i className="fa fa-bars fa-2x" ref="navBtn" />
           </div> : null
-          } 
+          }
         {state.app.signedIn ?
           <div className="user-id">
             <span>User: {state.app.userId}
@@ -88,10 +88,10 @@ var Body = React.createClass({
         <div id="main">
           <div id="game-header">
             <div className="title">
-              <h1>moriarty</h1>
+              <h1>Moriarty</h1>
             </div>
             <div className="logo">
-              <img className="logo" src="/images/Battleship.png" />
+              <img className="logo" src="/images/pipeb.png" />
             </div>
           </div>
           <div>
@@ -105,10 +105,7 @@ var Body = React.createClass({
             <a href="https://twitter.com/share" className="twitter-share-button" data-count="none">Tweet</a>
             <div className="fb-share-button" data-layout="button"></div>
           </div>
-          <div className="content"> ©
-            <a target="_blank" href="//janekk.github.io">&nbsp;Janekk&nbsp;</a>
-            2015
-          </div>
+
         </div>
         <ModalBox ref="modal"/>
       </div>);
