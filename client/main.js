@@ -91,7 +91,7 @@ var Body = React.createClass({
               <h1>Moriarty</h1>
             </div>
             <div className="logo">
-              <img className="logo" src="/images/pipeb.png" />
+              <img className="logo" src="/images/oldstylec.svg" />
             </div>
           </div>
           <div>
