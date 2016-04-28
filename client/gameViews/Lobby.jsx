@@ -24,7 +24,7 @@ var Lobby = React.createClass({
     this.setState(update);
   },
 
-  handleInvitationClick(user) {
+  handleJoinClick(user) {
     var {state} = this;
     if (user.hasInvited) {
       Actions.init.acceptInvitation(true, state.userId, user.id);
@@ -38,7 +38,7 @@ var Lobby = React.createClass({
     var {state} = this, items = [];
     state.users.forEach((user) => {
       if (user.id != state.userId) {
-        items.push(<UserItem key={user.id} onInvitationClick={this.handleInvitationClick.bind(this, user)} user={user}/>);
+        items.push(<GameItem key={user.id} onJoinClick={this.handleJoinClick.bind(this, user)} user={user}/>);
       }
     });
     return (
@@ -46,11 +46,11 @@ var Lobby = React.createClass({
       {items.length > 0 ?
         <div>
           <div className="header">
-            <p>Invite other users or accept an invitation to start playing!</p>
+            <p>Select an open game, or create your own!</p>
           </div>
 
           <div className="content">
-            <div className="header">Signed-in users:</div>
+            <div className="header">Open games:</div>
             <div className="user-list">
               <ul className="user-list-scroll">
           {items}
@@ -59,9 +59,9 @@ var Lobby = React.createClass({
           </div>
         </div>
         :
-        <div className="no-user">
-          <p>There are currently no other users in the lobby.</p>
-          <p>Please wait or invite a friend!</p>
+        <div className="no-games">
+          <p>There are currently no open games in the lobby.</p>
+          <p>Please wait or create a new one!</p>
         </div>
         }
       </div>
@@ -70,7 +70,7 @@ var Lobby = React.createClass({
 });
 
 
-var UserItem = React.createClass({
+var GameItem = React.createClass({
   render() {
     var {props} = this;
 
@@ -101,7 +101,7 @@ var UserItem = React.createClass({
       <li className={itemClasses}>
         <div className="user-name">{props.user.id}</div>
         <div className="user-invitation">
-          <button className="btn btn-primary" onClick={props.onInvitationClick} disabled={btnDisabled}>
+          <button className="btn btn-primary" onClick={props.onJoinClick} disabled={btnDisabled}>
             {getCaption()}
           </button>
         </div>
