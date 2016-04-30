@@ -65,7 +65,7 @@ module.exports = function (io, gameService) {
       });
 
       socket.on(gameEvents.client.invitationRequest, function (userID) {
-        var result = _lobby.inviteUser(userID, socket.username);
+        var result = _lobby.joinGame(userID, socket.username);
         socket.emit(gameEvents.server.invitationRequestStatus, result);
 
         if (result.isSuccessful) {

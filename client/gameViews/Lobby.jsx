@@ -30,7 +30,7 @@ var Lobby = React.createClass({
       Actions.init.acceptInvitation(true, state.userId, user.id);
     }
     else {
-      Actions.init.inviteUser(user.id);
+      Actions.init.joinGame(user.id);
     }
   },
 
