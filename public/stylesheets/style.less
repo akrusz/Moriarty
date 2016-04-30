@@ -31,8 +31,9 @@
 @fill-ship-hit: red;
 
 .enter-buttom{
-  text-align: center;
   margin-right: 10px;
+  text-align: center;
+
 }
 .margin-10{
   margin-top: 10px;
@@ -212,6 +213,7 @@ html, body {
 
   #header {
     height: @height-header;
+    border-bottom: 2px solid @color-alt;
 
     .header-controls() {
       color: @color-alt;
@@ -354,6 +356,7 @@ html, body {
     height: @height-footer;
     padding: 8px 1px;
     text-align: center;
+    border-top: 2px solid @color-alt;
 
     .content {
       display: inline-block;
@@ -431,6 +434,7 @@ html, body {
         img.logo {
           vertical-align: initial;
           width: 100%;
+          max-width: 222px;
         }
       }
     }
@@ -443,11 +447,14 @@ html, body {
 
       input {
         font-family: 'Josefin Sans';
+        padding: 4px 2px;
+
       }
 
       button.btn {
         line-height: 1;
         font-family: 'Josefin Sans';
+
       }
 
       @media (min-width: @screen-sm-min) {
@@ -771,7 +778,7 @@ html, body {
           font-weight: 700;
           font-family: 'Josefin Sans', Arial, sans-serif;
           @btn-primary-bg: gray;
-          /*@btn-primary-border: darken(gray, 5%);*/
+          @btn-primary-border: darken(gray, 5%);
         }
       }
 
