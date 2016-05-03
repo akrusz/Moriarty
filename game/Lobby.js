@@ -74,7 +74,7 @@ var Lobby = function () {
     return messageHelper.OK();
   };
 
-  this.inviteUser = function (userId, invitingUserId) {
+  this.joinGame = function (userId, invitingUserId) {
     var invitingUser = _.find(users, {id: invitingUserId});
     if (!invitingUser) { // user isn't in lobby
       return messageHelper.toResult(new Error('You\'re not in the lobby.'));

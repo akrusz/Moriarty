@@ -57,7 +57,7 @@ describe('Lobby', function () {
     var inviting = 'inviting';
     Lobby.enterLobby(inviting);
 
-    var result = Lobby.inviteUser(username, inviting);
+    var result = Lobby.joinGame(username, inviting);
     expect(result.isSuccessful).toBeTruthy();
     expect(result.from).toEqual(inviting);
     expect(result.to).toEqual(username);
@@ -69,7 +69,7 @@ describe('Lobby', function () {
     var inviting = 'inviting';
     Lobby.enterLobby(inviting);
 
-    var result = Lobby.inviteUser(username, inviting);
+    var result = Lobby.joinGame(username, inviting);
     expect(result.isSuccessful).toBeFalsy();
     expect(result.error).toBeTruthy();
   });
@@ -80,8 +80,8 @@ describe('Lobby', function () {
     var inviting = 'inviting';
     Lobby.enterLobby(inviting);
 
-    Lobby.inviteUser(username, inviting);
-    var result = Lobby.inviteUser(username, inviting);
+    Lobby.joinGame(username, inviting);
+    var result = Lobby.joinGame(username, inviting);
     expect(result.isSuccessful).toBeFalsy();
     expect(result.error).toEqual('The user has already an invitation from you.');
   });
@@ -93,7 +93,7 @@ describe('Lobby', function () {
     var inviting = 'inviting';
     Lobby.enterLobby(inviting);
 
-    Lobby.inviteUser(username, inviting);
+    Lobby.joinGame(username, inviting);
     var result = Lobby.acceptInvitation(true, username, inviting);
     var users = Lobby.getLobbyState().users;
     expect(_.find(users, {id: inviting}).isPlaying).toBeTruthy();

@@ -31,7 +31,7 @@ var InvitationStore = Reflux.createStore({
       }
     });
 
-    this.listenTo(Actions.init.inviteUser, this.inviteUser);
+    this.listenTo(Actions.init.joinGame, this.joinGame);
     this.listenTo(Actions.init.acceptInvitation, this.acceptInvitation);
   },
 
@@ -46,7 +46,7 @@ var InvitationStore = Reflux.createStore({
     return false;
   },
 
-  inviteUser(userId) {
+  joinGame(userId) {
     socket.emit(gameEvents.client.invitationRequest, userId);
   },
 
