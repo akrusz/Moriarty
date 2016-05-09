@@ -14,6 +14,8 @@ var GamePhaseStore = Reflux.createStore({
     this.listenTo(Actions.init.showSignIn, this.initSignIn);
     this.listenTo(Actions.init.signIn, this.initStoresOnSignIn);
     this.listenTo(Actions.init.signIn, this.enterLobby);
+    this.listenTo(Actions.init.signInCreate, this.initStoresOnSignIn);
+    this.listenTo(Actions.init.signIn, this.enterLobbyCreate);
     this.listenTo(Actions.game.shoot, this.takeShot);
     this.listenTo(Actions.game.quit, this.quitGame);
     this.listenTo(Actions.init.signOut, this.signOut);
@@ -119,7 +121,30 @@ var GamePhaseStore = Reflux.createStore({
     this.trigger(this.game);
   },
 
+  initCreateGame() {
+    this.game = {phase: phase.createGame};
+    this.trigger(this.game);
+  },
+
   enterLobby(userName) {
+    var validationError = validator.validateUserId(userName);
+    if(validationError) {
+      return Actions.common.error(validationError);
+    }
+
+    socket.connect();
+
+    socket.on(gameEvents.server.enterLobbyStatus, (result) => {
+      if(result.isSuccessful) {
+        this.game.phase = phase.inLobby;
+        this.game.user = result.user;
+        this.trigger(this.game);
+      }
+    });
+    socket.emit(gameEvents.client.enterLobby, userName);
+  },
+
+  enterLobbyCreate(userName) {
     var validationError = validator.validateUserId(userName);
     if(validationError) {
       return Actions.common.error(validationError);

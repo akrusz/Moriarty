@@ -7,10 +7,10 @@ var actions = {
   init: {
     showSignIn: Reflux.createAction(),
     signIn: Reflux.createAction(),
+    signInCreate: Reflux.createAction(),
     joinGame: Reflux.createAction(),
     acceptInvitation: Reflux.createAction(),
     signOut: Reflux.createAction()
-
   },
   setup: {
     selectConfigItem: Reflux.createAction(),

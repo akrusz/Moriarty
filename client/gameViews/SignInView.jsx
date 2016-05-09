@@ -16,7 +16,7 @@ var SignInView = React.createClass({
     e.preventDefault();
     var userName = this.refs.userName.getDOMNode().value;
     if (userName) {
-      Actions.init.signIn(userName);
+      Actions.init.signInCreate(userName);
     }
   },
 

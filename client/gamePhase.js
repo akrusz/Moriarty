@@ -1,5 +1,6 @@
 var gamePhase = {
   signIn: 0,
+  createGame: 5,
   inLobby: 10,
   setup: 20,
   readyToShoot: 40,
