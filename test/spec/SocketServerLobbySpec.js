@@ -109,15 +109,15 @@ describe('Lobby service', function () {
   //
   //it('doesn\'t allow to invite by unsigned user', function (done) {
   //  client.emit(gameEvents.client.enterLobby, 'test');
-  //  var lobbyUsers;
+  //  var LobbyGames;
   //  client.on(gameEvents.server.lobbyUpdate, function (users) {
-  //    lobbyUsers = users;
+  //    LobbyGames = users;
   //    var otherClient = utils.getClient();
   //    otherClient.on(gameEvents.server.invitationRequestStatus, function (result) {
   //      expect(result.isSuccessful).toBe(false);
   //      done();
   //    });
-  //    var inviteId = _.find(lobbyUsers.users, {username: 'test'}).id;
+  //    var inviteId = _.find(LobbyGames.users, {username: 'test'}).id;
   //    otherClient.emit(gameEvents.client.invitationRequest, inviteId);
   //  });
   //});
@@ -134,7 +134,7 @@ describe('Lobby service', function () {
   //});
   //
   it('allows to invite a user', function (done) {
-    var lobbyUsers, inviteId = 'test', otherId = 'other';
+    var LobbyGames, inviteId = 'test', otherId = 'other';
     var gotStatus, gotFwd;
     var checkComplete = function(done) {
       if (gotStatus && gotFwd) {
@@ -144,7 +144,7 @@ describe('Lobby service', function () {
 
     invitedClient.emit(gameEvents.client.enterLobby, inviteId);
     invitedClient.on(gameEvents.server.lobbyUpdate, function (result) {
-      lobbyUsers = result.users;
+      LobbyGames = result.users;
 
       var otherClient = utils.getClient();
       otherClient.on(gameEvents.server.lobbyUpdate, function (result) {

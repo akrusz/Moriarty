@@ -75,8 +75,8 @@ var GameItem = React.createClass({
     var {props} = this;
 
     var getCaption = () => {
-      if (props.user.isPlaying) {
-        return 'Is playing..';
+      if (props.user.isInGame) {
+        return 'Is in a game...';
       }
       else {
         if (props.user.hasInvited) {
@@ -93,10 +93,10 @@ var GameItem = React.createClass({
 
     var itemClasses = React.addons.classSet({
       'user-item': true,
-      'playing': props.user.isPlaying
+      'playing': props.user.isInGame
     });
 
-    var btnDisabled = props.user.gotInvitation || props.user.isPlaying;
+    var btnDisabled = props.user.gotInvitation || props.user.isInGame;
     return (
       <li className={itemClasses}>
         <div className="user-name">{props.user.id}</div>

@@ -4,11 +4,18 @@ var _ = require('lodash')
 
 var Lobby = function () {
   var users = [];
+  var games = [];
   var invitations = [];
 
-  function LobbyUser(id) {
-    this.id = id;
-    this.isPlaying = false;
+  function LobbyUser(username) {
+    this.username = username;
+    this.isInGame = false;
+  }
+
+  function LobbyGame(username) {
+    this.creatorId = username;
+    this.users = [new LobbyUser(username)];
+    this.isStarted = false;
   }
 
   function getLobbyState() {
@@ -19,11 +26,15 @@ var Lobby = function () {
     return _.find(users, {id: id});
   }
 
+  function findUsers(ids) {
+    return ids.map(function(id) {return _.find(users, {id: id})});
+  }
+
   this.getLobbyState = function () {
     return getLobbyState();
   };
 
-  this.enterLobby = function (username, wasPlaying) {
+  this.enterLobby = function (username, wasPlaying, create) {
     if (!username) {
       return messageHelper.toResult(new Error('User name is empty.'));
     }
@@ -43,6 +54,12 @@ var Lobby = function () {
       // join lobby
       var user = new LobbyUser(username);
       users.push(user);
+
+      if(create){
+        // create game
+        var game = new LobbyGame(username);
+        games.push(game);
+      }
       return messageHelper.toResult({user: user});
     }
     else {
@@ -69,7 +86,7 @@ var Lobby = function () {
       _.remove(invitations, {to: username});
     }
     else {
-      storedUser.isPlaying = true;
+      storedUser.isInRoom = true;
     }
     return messageHelper.OK();
   };
@@ -104,8 +121,8 @@ var Lobby = function () {
         return messageHelper.toResult(new Error('You\'re not invited by this user!'));
       }
 
-      _.find(users, {id: invitation.from}).isPlaying = true;
-      _.find(users, {id: invitation.to}).isPlaying = true;
+      _.find(users, {id: invitation.from}).isInRoom = true;
+      _.find(users, {id: invitation.to}).isInRoom = true;
       _.remove(invitations, invitation);
     }
     return messageHelper.toResult({accepted: accepted, invitation: invitation});

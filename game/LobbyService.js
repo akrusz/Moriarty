@@ -105,9 +105,8 @@ module.exports = function (io, gameService) {
       var otherSocket = _findUserSocket(response.invitation.from);
       otherSocket.emit(gameEvents.server.invitationResponse, result);
 
-      //join game
+      // join game, leaving the host in the lobby
       _leaveLobby(socket, true);
-      _leaveLobby(otherSocket, true);
       io.to('lobby').emit(gameEvents.server.lobbyUpdate, _lobby.getLobbyState());
 
       setTimeout(function () {
