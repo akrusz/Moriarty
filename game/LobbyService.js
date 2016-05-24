@@ -7,6 +7,7 @@ var _ = require('lodash')
 module.exports = function (io, gameService) {
 
   var _lobby = new Lobby();
+  var _users = [];
   var _games = [];
 
   var _findUserSocket = function (userId) {

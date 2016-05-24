@@ -12,7 +12,8 @@ var LobbyStore = Reflux.createStore({
   setInitialState() {
     this.state = {
       userId: null,
-      users: []
+      users: [],
+      games: []
     }
   },
 

@@ -10,7 +10,8 @@ var Lobby = React.createClass({
   getInitialState() {
     return {
       userId: null,
-      users: []
+      users: [],
+      games: []
     }
   },
 
@@ -36,9 +37,9 @@ var Lobby = React.createClass({
 
   render() {
     var {state} = this, items = [];
-    state.users.forEach((user) => {
-      if (user.id != state.userId) {
-        items.push(<GameItem key={user.id} onJoinClick={this.handleJoinClick.bind(this, user)} user={user}/>);
+    state.games.forEach((game) => {
+      if (game.id != state.userId) {
+        items.push(<GameItem key={game.id} onJoinClick={this.handleJoinClick.bind(this, game)} user={game}/>);
       }
     });
     return (
