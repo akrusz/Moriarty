@@ -1,6 +1,7 @@
 var gameEvents = {
   client : {
-    enterLobby: 'enter lobby',
+    createGame: 'create game',
+    joinGame: 'join game',
     invitationRequest: 'invitation request',
     invitationResponse: 'invitation response',
     placeShips: 'place ships',

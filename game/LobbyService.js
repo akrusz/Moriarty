@@ -52,8 +52,8 @@ module.exports = function (io, gameService) {
     io.on('connection', function (socket) {
       socket.emit("ping");
 
-      socket.on(gameEvents.client.enterLobby, function (username) {
-        var result = _lobby.enterLobby(username);
+      socket.on(gameEvents.client.createGame, function (username) {
+        var result = _lobby.enterLobby(username, false, true);
         socket.emit(gameEvents.server.enterLobbyStatus, result);
 
         if (result.isSuccessful) {

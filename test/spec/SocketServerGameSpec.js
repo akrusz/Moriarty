@@ -51,7 +51,7 @@ describe('socket-server', function () {
       done();
     });
 
-    client.emit(gameEvents.client.enterLobby, 'test user');
+    client.emit(gameEvents.client.createGame, 'test user');
     client.emit(gameEvents.client.placeShips, []);
   });
 

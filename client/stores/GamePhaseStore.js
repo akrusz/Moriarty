@@ -141,7 +141,7 @@ var GamePhaseStore = Reflux.createStore({
         this.trigger(this.game);
       }
     });
-    socket.emit(gameEvents.client.enterLobby, userName);
+    socket.emit(gameEvents.client.createGame, userName);
   },
 
   enterLobbyCreate(userName) {
@@ -159,7 +159,7 @@ var GamePhaseStore = Reflux.createStore({
         this.trigger(this.game);
       }
     });
-    socket.emit(gameEvents.client.enterLobby, userName);
+    socket.emit(gameEvents.client.createGame, userName);
   }
 });
 

@@ -38,7 +38,7 @@ describe('Lobby service', function () {
       expect(users).not.toBeNull();
       done();
     });
-    invitedClient.emit(gameEvents.client.enterLobby, 'test user');
+    invitedClient.emit(gameEvents.client.createGame, 'test user');
   });
 
   it('returns own user data on lobby enter', function (done) {
@@ -49,12 +49,12 @@ describe('Lobby service', function () {
       expect(result.user.id).toBe('test user');
       done();
     });
-    invitedClient.emit(gameEvents.client.enterLobby, 'test user');
+    invitedClient.emit(gameEvents.client.createGame, 'test user');
   });
 
   it('allows to use the same name after previous user was disconnected', function (done) {
     var username = 'test user';
-    invitedClient.emit(gameEvents.client.enterLobby, username);
+    invitedClient.emit(gameEvents.client.createGame, username);
 
     invitedClient.disconnect();
     invitedClient = require('socket.io-client')('http://localhost:3000', {
@@ -67,7 +67,7 @@ describe('Lobby service', function () {
       done();
     });
 
-    invitedClient.emit(gameEvents.client.enterLobby, username);
+    invitedClient.emit(gameEvents.client.createGame, username);
   });
   //it('doesn\'t allow to enter lobby with the same name more than once', function (done) {
   //
@@ -76,8 +76,8 @@ describe('Lobby service', function () {
   //    done();
   //  });
   //
-  //  client.emit(gameEvents.client.enterLobby, 'test user');
-  //  client.emit(gameEvents.client.enterLobby, 'test user');
+  //  client.emit(gameEvents.client.createGame, 'test user');
+  //  client.emit(gameEvents.client.createGame, 'test user');
   //});
   //
   //var waitForEnterLobbyError = function (done) {
@@ -94,21 +94,21 @@ describe('Lobby service', function () {
   //
   //it('doesn\'t allow to enter lobby with null name', function (done) {
   //  waitForEnterLobbyError(done);
-  //  client.emit(gameEvents.client.enterLobby, null);
+  //  client.emit(gameEvents.client.createGame, null);
   //});
   //
   //it('doesn\'t allow to enter lobby with empty name', function (done) {
   //  waitForEnterLobbyError(done);
-  //  client.emit(gameEvents.client.enterLobby, '');
+  //  client.emit(gameEvents.client.createGame, '');
   //});
   //
   //it('doesn\'t allow to enter lobby with undefined name', function (done) {
   //  waitForEnterLobbyError(done);
-  //  client.emit(gameEvents.client.enterLobby);
+  //  client.emit(gameEvents.client.createGame);
   //});
   //
   //it('doesn\'t allow to invite by unsigned user', function (done) {
-  //  client.emit(gameEvents.client.enterLobby, 'test');
+  //  client.emit(gameEvents.client.createGame, 'test');
   //  var LobbyGames;
   //  client.on(gameEvents.server.lobbyUpdate, function (users) {
   //    LobbyGames = users;
@@ -123,7 +123,7 @@ describe('Lobby service', function () {
   //});
   //
   //it('doesn\'t allow to invite non-existing user', function (done) {
-  //  client.emit(gameEvents.client.enterLobby, 'test');
+  //  client.emit(gameEvents.client.createGame, 'test');
   //
   //  client.on(gameEvents.server.invitationRequestStatus, function (result) {
   //    expect(result.isSuccessful).toBe(false);
@@ -142,7 +142,7 @@ describe('Lobby service', function () {
       }
     };
 
-    invitedClient.emit(gameEvents.client.enterLobby, inviteId);
+    invitedClient.emit(gameEvents.client.createGame, inviteId);
     invitedClient.on(gameEvents.server.lobbyUpdate, function (result) {
       LobbyGames = result.users;
 
@@ -174,7 +174,7 @@ describe('Lobby service', function () {
         });
         otherClient.emit(gameEvents.client.invitationRequest, inviteId);
       });
-      otherClient.emit(gameEvents.client.enterLobby, otherId);
+      otherClient.emit(gameEvents.client.createGame, otherId);
     });
   });
 

@@ -13,7 +13,7 @@ describe('Lobby', function () {
   it('allows to enter lobby', function () {
 
     var username = 'test';
-    var result = Lobby.enterLobby(username);
+    var result = Lobby.createGame(username);
 
     expect(result.isSuccessful).toBeTruthy();
     expect(result.user.id).toEqual(username);
@@ -25,8 +25,8 @@ describe('Lobby', function () {
   it('doesn\'t allow to enter lobby with the same name twice', function () {
 
     var username = 'test';
-    var result = Lobby.enterLobby(username);
-    var result = Lobby.enterLobby(username);
+    var result = Lobby.createGame(username);
+    var result = Lobby.createGame(username);
 
     expect(result.isSuccessful).toBeFalsy();
     expect(result.error).toBe('The username already exists.');
@@ -34,7 +34,7 @@ describe('Lobby', function () {
 
   it('allows to leave lobby', function () {
     var username = 'test';
-    var result = Lobby.enterLobby(username);
+    var result = Lobby.createGame(username);
     var result = Lobby.leaveLobby(username);
 
     expect(result.isSuccessful).toBeTruthy();
@@ -52,10 +52,10 @@ describe('Lobby', function () {
 
   it('allows to invite a user', function () {
     var username = 'test';
-    Lobby.enterLobby(username);
+    Lobby.createGame(username);
 
     var inviting = 'inviting';
-    Lobby.enterLobby(inviting);
+    Lobby.createGame(inviting);
 
     var result = Lobby.joinGame(username, inviting);
     expect(result.isSuccessful).toBeTruthy();
@@ -67,7 +67,7 @@ describe('Lobby', function () {
     var username = 'test';
 
     var inviting = 'inviting';
-    Lobby.enterLobby(inviting);
+    Lobby.createGame(inviting);
 
     var result = Lobby.joinGame(username, inviting);
     expect(result.isSuccessful).toBeFalsy();
@@ -76,9 +76,9 @@ describe('Lobby', function () {
 
   it('doesn\'t allow to send an invitation more than once', function () {
     var username = 'test';
-    Lobby.enterLobby(username);
+    Lobby.createGame(username);
     var inviting = 'inviting';
-    Lobby.enterLobby(inviting);
+    Lobby.createGame(inviting);
 
     Lobby.joinGame(username, inviting);
     var result = Lobby.joinGame(username, inviting);
@@ -88,10 +88,10 @@ describe('Lobby', function () {
 
   it('allows to accept an invitation', function () {
     var username = 'test';
-    Lobby.enterLobby(username);
+    Lobby.createGame(username);
 
     var inviting = 'inviting';
-    Lobby.enterLobby(inviting);
+    Lobby.createGame(inviting);
 
     Lobby.joinGame(username, inviting);
     var result = Lobby.acceptInvitation(true, username, inviting);
@@ -108,12 +108,12 @@ describe('Lobby', function () {
   //    expect(user.username).toBe('test user');
   //    done();
   //  });
-  //  client.emit(gameEvents.client.enterLobby, 'test user');
+  //  client.emit(gameEvents.client.createGame, 'test user');
   //});
   //
   //it('allows to use the same name after previous user was disconnected', function (done) {
   //
-  //  client.emit(gameEvents.client.enterLobby, 'test user');
+  //  client.emit(gameEvents.client.createGame, 'test user');
   //
   //  client.disconnect();
   //  client = require('socket.io-client')('http://localhost:3000', {
@@ -125,7 +125,7 @@ describe('Lobby', function () {
   //    done();
   //  });
   //
-  //  client.emit(gameEvents.client.enterLobby, 'test user');
+  //  client.emit(gameEvents.client.createGame, 'test user');
   //});
   //
   //
@@ -136,8 +136,8 @@ describe('Lobby', function () {
   //    done();
   //  });
   //
-  //  client.emit(gameEvents.client.enterLobby, 'test user');
-  //  client.emit(gameEvents.client.enterLobby, 'test user');
+  //  client.emit(gameEvents.client.createGame, 'test user');
+  //  client.emit(gameEvents.client.createGame, 'test user');
   //});
   //
   //var waitForEnterLobbyError = function (done) {
@@ -154,21 +154,21 @@ describe('Lobby', function () {
   //
   //it('disallows to enter lobby with null name', function (done) {
   //  waitForEnterLobbyError(done);
-  //  client.emit(gameEvents.client.enterLobby, null);
+  //  client.emit(gameEvents.client.createGame, null);
   //});
   //
   //it('disallows to enter lobby with empty name', function (done) {
   //  waitForEnterLobbyError(done);
-  //  client.emit(gameEvents.client.enterLobby, '');
+  //  client.emit(gameEvents.client.createGame, '');
   //});
   //
   //it('disallows to enter lobby with undefined name', function (done) {
   //  waitForEnterLobbyError(done);
-  //  client.emit(gameEvents.client.enterLobby);
+  //  client.emit(gameEvents.client.createGame);
   //});
   //
   //it('disallows to invite by unsigned user', function (done) {
-  //  client.emit(gameEvents.client.enterLobby, 'test');
+  //  client.emit(gameEvents.client.createGame, 'test');
   //  var LobbyGames;
   //  client.on(gameEvents.server.lobbyUpdate, function (users) {
   //    LobbyGames = users;
@@ -183,7 +183,7 @@ describe('Lobby', function () {
   //});
   //
   //it('disallows to invite non-existing user', function (done) {
-  //  client.emit(gameEvents.client.enterLobby, 'test');
+  //  client.emit(gameEvents.client.createGame, 'test');
   //
   //  client.on(gameEvents.server.invitationRequestStatus, function (result) {
   //    expect(result.isSuccessful).toBe(false);
@@ -195,12 +195,12 @@ describe('Lobby', function () {
   //
   //it('allows to invite a user', function (done) {
   //  var LobbyGames;
-  //  client.emit(gameEvents.client.enterLobby, 'test');
+  //  client.emit(gameEvents.client.createGame, 'test');
   //  client.on(gameEvents.server.lobbyUpdate, function (users) {
   //    LobbyGames = users;
   //
   //    var otherClient = utils.getClient();
-  //    otherClient.emit(gameEvents.client.enterLobby, 'other');
+  //    otherClient.emit(gameEvents.client.createGame, 'other');
   //    otherClient.on(gameEvents.server.lobbyUpdate, function (users) {
   //      otherClient.on(gameEvents.server.invitationRequestStatus, function (result) {
   //        expect(result.isSuccessful).toBe(true);

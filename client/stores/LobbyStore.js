@@ -34,12 +34,21 @@ var LobbyStore = Reflux.createStore({
 
     socket.on(gameEvents.server.lobbyUpdate, (update) => {
       var {state} = this;
+      // update users
       update.users.forEach((user) => {
         user.hasInvited = !!_.find(update.invitations, {from: user.id, to: state.userId});
         user.gotInvitation = !!_.find(update.invitations, {to: user.id, from: state.userId});
       });
 
       state.users = update.users;
+
+      // update games
+      update.games.forEach((game) => {
+        game.creatorId = !!_.find(update.users, {from: game.creatorId, to: state.creatorId});
+        game.users= !!_.find(update.invitations, {to: game.users, from: state.users});
+      });
+
+      state.games = update.games;
       this.trigger(state);
     });
 

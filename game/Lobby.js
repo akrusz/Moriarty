@@ -19,8 +19,12 @@ var Lobby = function () {
   }
 
   function getLobbyState() {
-    return {users: users, invitations: invitations};
+    return {users: users, games: games, invitations: invitations};
   };
+
+  function findGame(id) {
+    return _.find(games, {creatorId: id});
+  }
 
   function findUser(id) {
     return _.find(users, {id: id});
